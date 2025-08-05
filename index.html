@@ -94,50 +94,5 @@
           </a>
         </div>
     </footer>
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const titles = document.querySelectorAll(".project-title");
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("animate");
-                    }
-                });
-            });
-
-            titles.forEach((title) => observer.observe(title));
-        });
-        document.addEventListener("DOMContentLoaded", () => {
-            const descriptions = document.querySelectorAll(".description");
-
-            descriptions.forEach((desc, index) => {
-                const text = desc.getAttribute("data-text");
-                const words = text.split(" ");
-                desc.textContent = ""; // Clear the content initially
-
-                let wordIndex = 0;
-
-                const delay = index === 0 ? 3000 : 21000; // Adjust delay for each description
-                setTimeout(() => {
-                    const interval = setInterval(() => {
-                        if (wordIndex < words.length) {
-                            desc.textContent += words[wordIndex] + " ";
-                            wordIndex++;
-                        } else {
-                            clearInterval(interval); // Stop the interval when all words are printed
-                        }
-                    }, 200); // Adjust the speed of word appearance
-                }, delay);
-            });
-        });
-    </script> -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
 </body>
-
 </html>
