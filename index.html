@@ -22,29 +22,35 @@
         <div class="heading">
             <aside class="hone">This is</aside>
             <aside class="htwo">Kaniz Zainab Chowdhury</aside>
+            <h5 style="padding: 10px; text-align: center;">Here is a little about me</h5>
         </div>
         <div class="about">
-            <h5 style="padding: 10px;">Here is a little about me</h5>
-            <pre style="font-family: cursive;">
+            <div class="para">
+            <p style="font-family: cursive;">
                 Hi! I'm Kaniz Zainab Chowdhury, a passionate student of Information Science and Engineering with a deep
                 enthusiasm for coding, problem-solving, and building impactful solutions. Originally from a vibrant background
                 rooted in curiosity and creativity, I'm currently shaping my journey through engineering with a focus on blending
-                technology with real-world solutions.
-                
+                technology with real-world solutions.</p> <br>
+            <p style="font-family: cursive;">
                 I enjoy working on projects that challenge me to think deeper — from developing a multilingual remedy chatbot with
                 voice and WhatsApp integration, to working on crime prediction systems and facial recognition-based attendance
                 tools. I'm especially drawn to innovative tech like AI, blockchain, and human-centered applications
-                that can improve everyday life.
-                
+                that can improve everyday life. </p> <br>
+            <p style="font-family: cursive;">
                 What sets me apart is my strong communication skills, especially in listening, which helps me connect with team
                 members and end-users effectively. I'm also a natural collaborator who believes that even the most complex challenges
-                can be solved with the right mindset and teamwork.
-                
+                can be solved with the right mindset and teamwork.</p> <br>
+            <p style="font-family: cursive;">
                 When I'm not coding or planning out my next idea, you'll find me exploring new tech trends, participating in hackathons,
-                or learning something new that feeds my curiosity.
-                
+                or learning something new that feeds my curiosity.</p> <br>
+            <p style="font-family: cursive;">
                 Let's create something meaningful!
-            </pre>
+            </p>
+            </div>
+            <div class="photo-container">
+                <img src="photo.jpg" alt="My Pic" class="photo">
+                <span class="highlight" aria-hidden="true"></span>
+            </div>
         </div>
     </header>
     <section class="projects">
@@ -80,8 +86,56 @@
             </div>
         </div>
     </section>
+    <section class="skills-section">
+    <div class="skills-box">
+        <h2 class="skills-heading">Technical Skills</h2>
+        <div class="skill">
+            <span>HTML <img src="html_icon.png" alt="HTML" class="icon"></span>
+            <div class="progress"><div class="progress-bar" data-width = 90%></div></div>
+        </div>
+        <div class="skill">
+            <span>CSS <img src="css_icon.png" alt="CSS" class="icon"></span>
+            <div class="progress"><div class="progress-bar"data-width =  85%></div></div>
+        </div>
+        <div class="skill">
+            <span>JavaScript <img src="javascript_icon.png" alt="JavaScript" class="icon"></span>
+            <div class="progress"><div class="progress-bar" data-width = 75%></div></div>
+        </div>
+        <div class="skill">
+            <span>C <img src="c_icon.png" alt="C" class="icon"></span>
+            <div class="progress"><div class="progress-bar" data-width = 80%></div></div>
+        </div>
+        <div class="skill">
+            <span>Java <img src="java_icon.png" alt="Java" class="icon"></span>
+            <div class="progress"><div class="progress-bar" data-width =  70%></div></div>
+        </div>
+        <div class="skill">
+            <span>SQL <img src="sql_icon.png" alt="SQL" class="icon"></span>
+            <div class="progress"><div class="progress-bar" data-width = 60%></div></div>
+        </div>
+    </div>
+    <div class="skills-box">
+        <h2 class="skills-heading">Professional Skills</h2>
+        <div class="skill">
+            <span>Communication</span>
+            <div class="progress"><div class="progress-bar" data-width = 90%></div></div>
+        </div>
+        <div class="skill">
+            <span>Problem-Solving</span>
+            <div class="progress"><div class="progress-bar" data-width = 85%></div></div>
+        </div>
+        <div class="skill">
+            <span>Teamwork</span>
+            <div class="progress"><div class="progress-bar" data-width = 88%></div></div>
+        </div>
+        <div class="skill">
+            <span>Project Management</span>
+            <div class="progress"><div class="progress-bar" data-width = 88%></div></div>
+        </div>
+    </div>
+</section>
     <footer class="contact">
-        <h1 style="text-align: left;">Contact Me</h1> 
+        <h1 style="text-align: left; color: white;">Contact Me</h1> 
         <div class="social-links" style="text-align: right;">
           <a href="https://github.com/Kaniz2003" class="btn" target="_blank">
             <img src="github_icon.png" alt="GitHub" style="width: 60px; height: 60px; gap: 30px;">
@@ -94,5 +148,31 @@
           </a>
         </div>
     </footer>
+
+   <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const allBars = document.querySelectorAll(".progress-bar");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bars = entry.target.querySelectorAll(".progress-bar");
+                bars.forEach((bar, index) => {
+                    setTimeout(() => {
+                        const targetWidth = bar.getAttribute("data-width");
+                        bar.style.width = targetWidth;
+                    }, index * 200); // 200ms stagger
+                });
+                observer.unobserve(entry.target); // Animate only once
+            }
+        });
+    }, { threshold: 0.2 });
+
+    // Observe each skills-box so animations trigger per column
+    document.querySelectorAll(".skills-box").forEach(box => observer.observe(box));
+});
+</script>
+
+
 </body>
 </html>

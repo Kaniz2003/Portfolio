@@ -5,12 +5,154 @@
     font-weight: bold;
 }
 
-.about {
-    display: flexbox;
-    text-align: center;
+.about{
+    display: flex;
+    gap: 20px;
+    /* margin: auto; */
+}
+
+.para {
+    align-items: left;
+    text-align: justify;
     font-size: 20px;
     color: black;
+    width: 70vw;
+    margin: 20px;
 }
+
+/* Theme color variable */
+:root {
+  --accent: 233, 90, 113; /* keep as RGB components for easy rgba() */
+  --accent-rgba: rgba(var(--accent), 0.95);
+  --rays-opacity: 0.55;
+}
+
+/* Ensure container masks rays to image shape */
+.photo-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;           /* MASK the rays to the photo */
+  border-radius: 16px;        /* same radius as image for consistent mask */
+  width: 25vw;                /* keep same sizing logic as .photo */
+  height: 90vh;             
+  max-width: 320px;           /* optional cap */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  transform-style: preserve-3d;
+  -webkit-tap-highlight-color: transparent;
+  margin-right: 20px;;
+}
+
+/* Photo: keep responsive and cover the container */
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;     /* match container rounding */
+  transform-origin: center;
+  transition: transform 450ms cubic-bezier(.2,.9,.3,1), filter 450ms;
+}
+
+/* The animated rays layer (uses conic gradient) */
+.photo-container::before {
+  content: "";
+  position: absolute;
+  inset: -40%;                /* extend beyond edges so rays sweep nicely */
+  z-index: 1;                 /* sits above image but below overlay/glow */
+  background:
+    conic-gradient(
+      from 120deg,
+      rgba(var(--accent), 0.0) 0deg,
+      rgba(var(--accent), var(--rays-opacity)) 8deg,
+      rgba(var(--accent), 0.0) 18deg,
+      rgba(var(--accent), var(--rays-opacity)*0.4) 36deg,
+      rgba(var(--accent), 0.0) 50deg
+    );
+  transform: rotate(0deg);
+  filter: blur(10px) saturate(120%);
+  mix-blend-mode: screen;     /* blends nicely with image */
+  opacity: 0;
+  transition: opacity 300ms ease, transform 1200ms cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* A soft colored overlay/glow to reinforce theme */
+.photo-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;                 /* above rays and image */
+  background: radial-gradient(
+    circle at 20% 20%,
+    rgba(var(--accent), 0.12),
+    rgba(0,0,0,0) 40%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+/* Hover / focus state: reveal and animate rays + lift image */
+.photo-container:hover::before,
+.photo-container:focus-within::before {
+  opacity: 1;
+  transform: rotate(360deg);  /* one full sweep on hover */
+  transition-duration: 1200ms;
+}
+
+.photo-container:hover::after,
+.photo-container:focus-within::after {
+  opacity: 1;
+}
+
+.photo-container:hover .photo,
+.photo-container:focus-within .photo {
+  transform: scale(1.03) translateZ(10px);
+  filter: brightness(0.98) contrast(1.02);
+}
+
+/* Extra accent - a moving highlight streak (thin) */
+.photo-container .highlight {
+  position: absolute;
+  top: -60%;
+  left: -40%;
+  width: 40%;
+  height: 220%;
+  z-index: 3;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.25) 48%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: translateX(-120%) rotate(-12deg);
+  filter: blur(12px);
+  opacity: 0;
+  transition: transform 900ms cubic-bezier(.2,.8,.2,1), opacity 300ms;
+  pointer-events: none;
+}
+
+/* slide highlight across on hover */
+.photo-container:hover .highlight,
+.photo-container:focus-within .highlight {
+  transform: translateX(120%) rotate(-12deg);
+  opacity: 0.9;
+}
+
+/* Accessible reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  .photo-container::before,
+  .photo-container::after,
+  .photo-container .highlight,
+  .photo {
+    transition: none !important;
+    animation: none !important;
+  }
+  .photo-container::before { opacity: 0.25; transform: none; filter: none; }
+  .photo { transform: none; }
+}
+
 
 .hone {
     color: black;
@@ -162,4 +304,75 @@
     margin: auto;
     padding-top: 20px;
     padding-bottom: 10px;
+    background-color: black;
 }
+.skills-section {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 50px;
+    background-color: white; /* Matches your projects section */
+    flex-wrap: wrap;
+}
+
+.skills-box {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 20px;
+    border: 2px solid rgb(233, 90, 113);
+    border-radius: 20px;
+    background: transparent;
+}
+.skills-box:hover{
+    transform: scale(1.05);
+}
+
+.skills-heading {
+    text-align: center;
+    font-size: 28px;
+    color: black;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid rgb(233, 90, 113);
+    padding-bottom: 10px;
+}
+
+.skill {
+    margin-bottom: 15px;
+}
+
+.skill span {
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.skill .icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+}
+
+.progress {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, rgb(233, 90, 113), #ffb3c6);
+    width: 0; /* Start empty */
+    transition: width 1.2s ease-in-out;
+}
+
+/* Animation on scroll */
+.skill.show .progress-bar {
+    width: var(--target-width);
+}
+
+
