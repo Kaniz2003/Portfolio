@@ -31,11 +31,11 @@
                 enthusiasm for coding, problem-solving, and building impactful solutions. Originally from a vibrant background
                 rooted in curiosity and creativity, I'm currently shaping my journey through engineering with a focus on blending
                 technology with real-world solutions.</p> <br>
-            <p style="font-family: cursive;">
+            <!-- <p style="font-family: cursive;">
                 I enjoy working on projects that challenge me to think deeper — from developing a multilingual remedy chatbot with
                 voice and WhatsApp integration, to working on crime prediction systems and facial recognition-based attendance
                 tools. I'm especially drawn to innovative tech like AI, blockchain, and human-centered applications
-                that can improve everyday life. </p> <br>
+                that can improve everyday life. </p> <br> -->
             <p style="font-family: cursive;">
                 What sets me apart is my strong communication skills, especially in listening, which helps me connect with team
                 members and end-users effectively. I'm also a natural collaborator who believes that even the most complex challenges
@@ -170,6 +170,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Observe each skills-box so animations trigger per column
     document.querySelectorAll(".skills-box").forEach(box => observer.observe(box));
+
+    const projectSection = document.querySelector(".projects");
+        const projectObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    projectSection.classList.add("show");
+                    projectObserver.unobserve(projectSection); // Only animate once
+                }
+            });
+        }, { threshold: 0.2 });
+
+        projectObserver.observe(projectSection);
 });
 </script>
 

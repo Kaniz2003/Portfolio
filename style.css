@@ -3,12 +3,24 @@
     text-align: left;
     font-size: 100px;
     font-weight: bold;
+    animation: slide-side 1s ease-out forwards;
 }
 
 .about{
     display: flex;
-    gap: 20px;
+    gap: 50px;
     /* margin: auto; */
+    animation: slide-side 1.5s ease-out forwards;
+}
+@keyframes slide-side {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .para {
@@ -16,7 +28,7 @@
     text-align: justify;
     font-size: 20px;
     color: black;
-    width: 70vw;
+    width: 62vw;
     margin: 20px;
 }
 
@@ -34,7 +46,7 @@
   overflow: hidden;           /* MASK the rays to the photo */
   border-radius: 16px;        /* same radius as image for consistent mask */
   width: 25vw;                /* keep same sizing logic as .photo */
-  height: 90vh;             
+  height: 85vh;             
   max-width: 320px;           /* optional cap */
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
   transform-style: preserve-3d;
@@ -162,9 +174,21 @@
     color: rgb(233, 90, 113);
 }
 
-.projects {
+/* .projects {
     background-color: black;
+} */
+ .projects {
+  background-color: black;
+  opacity: 0;                 /* Start hidden */
+  transform: translateX(-50px); /* Move slightly down */
+  transition: all 0.8s ease-out;
 }
+
+.projects.show {
+  opacity: 1;                 /* Fade in */
+  transform: translateX(0);   /* Slide up smoothly */
+}
+
 
 .project-item {
     display: flex;
